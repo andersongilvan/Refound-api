@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  employee
+  manager
+}
+
+enum Category {
+  food
+  others
+  services
+  transport
+  accommodation
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+
+  role UserRole @default(employee)
+
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime?  @updatedAt @map("updated_at")
+  refounds  Refounds[]
+
+  @@map("users")
+}
+
+model Refounds {
+  id       String   @id @default(uuid())
+  name     String
+  amount   Decimal
+  category Category
+  filename String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("refounds")
+}
