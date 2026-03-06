@@ -26,7 +26,7 @@ export class CreateRefoundController {
 			});
 
 			const bodySchema = z.object({
-				name: z.string().min(6, 'O nome é obrigatório.'),
+				name: z.string().min(6, 'O nome deve conter no mínimo 6 caracteres.'),
 				amount: z.coerce.number().nonnegative('O valoe é obrigatório.'),
 				category: z.nativeEnum(Category),
 			});

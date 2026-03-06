@@ -3,6 +3,7 @@ import { verify } from 'jsonwebtoken';
 import { env } from '@/env';
 import { AuthError } from '@/errors/AuthError';
 
+
 interface TokenPayload {
 	sub: string;
 	role: string;
@@ -27,7 +28,7 @@ export function ensureAuth(request: Request, _response: Response, next: NextFunc
 
 		return next();
 	} catch (error) {
-		console.error(error);
+		console.log(error)
 		throw new AuthError('JWT Token inválido.');
 	}
 }

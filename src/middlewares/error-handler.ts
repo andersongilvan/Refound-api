@@ -6,7 +6,8 @@ import { ResourceNotFoundError } from '@/errors/ResourceNotFoundError';
 
 export function errorHandler(error: Error, _request: Request, response: Response, _next: NextFunction) {
 	if (error instanceof ZodError) {
-		return response.status(400).json({ validationError: error.format() });
+		console.log('error ', error);
+		return response.status(400).json({ validationError: error });
 	}
 
 	if (error instanceof ResourceNotFoundError) {

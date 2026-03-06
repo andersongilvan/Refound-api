@@ -11,9 +11,8 @@ export class ShowDetailsRefoundController {
 				refoundId: z.string().nonempty('O id do reembolso é obrigatório.'),
 			});
 			const { refoundId } = paramsSchema.parse(request.params);
-			const userId = request.user.id;
 
-			const result = await this.findRefoundByIdUseCse.execute({ refoundId, userId });
+			const result = await this.findRefoundByIdUseCse.execute({ refoundId });
 
 			return response.status(200).json(result);
 		} catch (error) {

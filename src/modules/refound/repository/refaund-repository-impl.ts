@@ -4,9 +4,9 @@ import type { RefoundRepository } from './refaound-repository';
 
 export class RefaundRepositoryImpl implements RefoundRepository {
 	// user mothods <-->
-	async showDetails(refoundId: string, userId: string): Promise<Refounds | null> {
+	async showDetails(refoundId: string): Promise<Refounds | null> {
 		return await prismaClient.refounds.findFirst({
-			where: { id: refoundId, userId },
+			where: { id: refoundId },
 		});
 	}
 

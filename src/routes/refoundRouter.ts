@@ -15,13 +15,15 @@ const upload = multer(uploadConfig.MULTER);
 // rotas privadas role employee
 refoundRoutes.post('/', verifyUser(['employee']), upload.single('file'), createRefoundController.handler);
 
-refoundRoutes.get('/', verifyUser(['employee']), showRefoundsByUserController.handler);
+refoundRoutes.get('/my', verifyUser(['employee']), showRefoundsByUserController.handler);
 
-refoundRoutes.get('/:refoundId', verifyUser(['employee']), showDetailsRefoundController.handler);
+
 
 refoundRoutes.delete('/:refoundId', verifyUser(['employee']), deleteRefoundController.handler);
 
 // rotas privadas role manager
 refoundRoutes.get('/', verifyUser(['manager']), indexController.handler);
+
+refoundRoutes.get('/details/:refoundId', verifyUser(['manager']), showDetailsRefoundController.handler);
 
 export { refoundRoutes };
